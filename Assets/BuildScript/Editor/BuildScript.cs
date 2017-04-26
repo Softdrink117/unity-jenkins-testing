@@ -17,6 +17,7 @@ public class BuildScript{
 
 	static void SetupNameAndDir(){
 		APP_NAME = FindAppName();
+		TARGET_DIR = FindTargetDir();
 	}
 
 	// Try to find the app name in the Resources/BuildScriptSettings.ini file
