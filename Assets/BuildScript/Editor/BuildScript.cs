@@ -5,6 +5,7 @@ using System.Collections;
 using UnityEditor;
 using System;
 using System.Collections.Generic;
+using System.IO;
  
 public class BuildScript{
  
@@ -27,8 +28,13 @@ public class BuildScript{
 		bool successFindName = true;
 		string nameOut = "";
 		try{
-			TextAsset buildScriptSettingsAsset = Resources.Load("BuildScriptSettings") as TextAsset;
-			string settingsText = buildScriptSettingsAsset.text;
+			//TextAsset buildScriptSettingsAsset = Resources.Load("BuildScriptSettings") as TextAsset;
+			//string settingsText = buildScriptSettingsAsset.text;
+
+			StreamReader sr = new StreamReader(Application.dataPath + "/BuildScript/Resources/BuildScriptSettings.ini");
+			string settingsText = sr.ReadToEnd();
+			sr.Close();
+
 			if(settingsText.Equals("")) successFindName = false;
 			string[] textLines = settingsText.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
 			if(textLines.Length < 2) successFindName = false;
@@ -53,8 +59,13 @@ public class BuildScript{
 		bool successFindDir = true;
 		string dirOut = "";
 		try{
-			TextAsset buildScriptSettingsAsset = Resources.Load("BuildScriptSettings") as TextAsset;
-			string settingsText = buildScriptSettingsAsset.text;
+			// TextAsset buildScriptSettingsAsset = Resources.Load("BuildScriptSettings") as TextAsset;
+			// string settingsText = buildScriptSettingsAsset.text;
+
+			StreamReader sr = new StreamReader(Application.dataPath + "/BuildScript/Resources/BuildScriptSettings.ini");
+			string settingsText = sr.ReadToEnd();
+			sr.Close();
+
 			if(settingsText.Equals("")) successFindDir = false;
 			string[] textLines = settingsText.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
 			if(textLines.Length < 2) successFindDir = false;
@@ -78,9 +89,9 @@ public class BuildScript{
 
 	[MenuItem ("Custom/CI/Build Windows 64-bit")]
 	static void PerformWinBuild (){
-		//SetNameAndDir();
-		string target_dir = FindAppName() + ".exe";
-		GenericBuild(SCENES, FindTargetDir() + "/win/" + target_dir, BuildTarget.StandaloneWindows64,BuildOptions.None);
+		SetNameAndDir();
+		string target_dir = APP_NAME + ".exe";
+		GenericBuild(SCENES, TARGET_DIR + "/win/" + target_dir, BuildTarget.StandaloneWindows64,BuildOptions.None);
 	}
 
 	[MenuItem ("Custom/CI/Build Windows 32-bit")]
