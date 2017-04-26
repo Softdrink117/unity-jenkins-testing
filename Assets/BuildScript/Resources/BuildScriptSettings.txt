@@ -1,0 +1,2 @@
+APP_NAME = unity-jenkins-build-testing-awoo
+TARGET_DIR = D:/unity-jenkins-test/Buildss/
