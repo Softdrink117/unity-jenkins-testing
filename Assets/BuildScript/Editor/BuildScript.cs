@@ -15,6 +15,8 @@ public class BuildScript{
 	static string APP_NAME = "unity-jenkins-test";
 	static string TARGET_DIR = "D:/unity-jenkins-test/Builds/";
 
+	// Path and filename -------
+
 	static void SetupNameAndDir(){
 		APP_NAME = FindAppName();
 		TARGET_DIR = FindTargetDir();
@@ -83,6 +85,7 @@ public class BuildScript{
 
 	[MenuItem ("Custom/CI/Build Windows 32-bit")]
 	static void PerformWin32Build (){
+		SetupNameAndDir();
 		string target_dir = APP_NAME + "_32.exe";
 		GenericBuild(SCENES, TARGET_DIR + "/win_3232/" + target_dir, BuildTarget.StandaloneWindows,BuildOptions.None);
 	}
@@ -91,12 +94,14 @@ public class BuildScript{
 
 	[MenuItem ("Custom/CI/Build Linux 64-bit")]
 	static void PerformLinuxBuild (){
+		SetupNameAndDir();
 		string target_dir = APP_NAME + "_32.exe";
 		GenericBuild(SCENES, TARGET_DIR + "/linux/" + target_dir, BuildTarget.StandaloneLinux64,BuildOptions.None);
 	}
 
 	[MenuItem ("Custom/CI/Build Linux 32-bit")]
 	static void PerformLinux32Build (){
+		SetupNameAndDir();
 		string target_dir = APP_NAME + "_32.exe";
 		GenericBuild(SCENES, TARGET_DIR + "/linux_32/" + target_dir, BuildTarget.StandaloneLinux,BuildOptions.None);
 	}
@@ -105,6 +110,7 @@ public class BuildScript{
 	 
 	[MenuItem ("Custom/CI/Build Mac OS X")]
 	static void PerformMacOSXBuild (){
+		SetupNameAndDir();
 		string target_dir = APP_NAME + ".app";
 		GenericBuild(SCENES, TARGET_DIR + "/mac/" + target_dir, BuildTarget.StandaloneOSXIntel,BuildOptions.None);
 	}
@@ -113,6 +119,7 @@ public class BuildScript{
 	 
 	[MenuItem ("Custom/CI/Build Web")]
 	static void PerformWebBuild (){
+		SetupNameAndDir();
 		string target_dir = APP_NAME + ".unity3d";
 		GenericBuild(SCENES, TARGET_DIR + "/web/" + target_dir, BuildTarget.WebPlayer,BuildOptions.None);
 	}
