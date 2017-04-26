@@ -13,7 +13,7 @@ public class BuildScript{
 	// static string APP_NAME = "<yourAPPName>";
 	// static string TARGET_DIR = "<YourTargetDir>";
 	static string APP_NAME = "unity-jenkins-test";
-	static string TARGET_DIR = "../Builds/";
+	static string TARGET_DIR = "D:/unity-jenkins-test/Builds/";
 	 
 	// Windows -------
 
