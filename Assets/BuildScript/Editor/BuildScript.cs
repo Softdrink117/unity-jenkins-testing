@@ -10,10 +10,10 @@ public class BuildScript{
  
 	static string[] SCENES = FindEnabledEditorScenes();
 	 
-	static string APP_NAME = "<yourAPPName>";
-	static string TARGET_DIR = "<YourTargetDir>";
-	//static string APP_NAME = "unity-jenkins-test";
-	//static string TARGET_DIR = "D:/unity-jenkins-test/Builds/";
+	//static string APP_NAME = "<yourAPPName>";
+	//static string TARGET_DIR = "<YourTargetDir>";
+	static string APP_NAME = "unity-jenkins-test";
+	static string TARGET_DIR = "D:/unity-jenkins-test/Builds/";
 
 	// Directory and name functions -------
 
@@ -78,7 +78,7 @@ public class BuildScript{
 
 	[MenuItem ("Custom/CI/Build Windows 64-bit")]
 	static void PerformWinBuild (){
-		SetNameAndDir();
+		//SetNameAndDir();
 		string target_dir = APP_NAME + ".exe";
 		GenericBuild(SCENES, TARGET_DIR + "/win/" + target_dir, BuildTarget.StandaloneWindows64,BuildOptions.None);
 	}
