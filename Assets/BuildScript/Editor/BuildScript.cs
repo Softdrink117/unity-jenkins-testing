@@ -2,7 +2,7 @@
 
 using UnityEngine;
 using System.Collections;
-using UnityEditor;
+using UnityEditor;			
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,68 +16,17 @@ public class BuildScript{
 	static string APP_NAME = "unity-jenkins-test";
 	static string TARGET_DIR = "D:/unity-jenkins-test/Builds/";
 
-	// Try to find the app name in the Resources/BuildScriptSettings.ini file
-	static string FindAppName(){
-		bool successFindName = true;
-		string nameOut = "";
-		try{
-			TextAsset buildScriptSettingsAsset = Resources.Load("BuildScriptSettings") as TextAsset;
-			string settingsText = buildScriptSettingsAsset.text;
-			if(settingsText.Equals("")) successFindName = false;
-			string[] textLines = settingsText.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
-			if(textLines.Length < 2) successFindName = false;
-			if(successFindName){
-				string[] lineSplit = textLines[0].Split(new string[] { " = ", "=" }, StringSplitOptions.RemoveEmptyEntries);
-				if(lineSplit.Length < 2) successFindName = false;
-				if(successFindName){
-					nameOut = lineSplit[1].Trim();
-				}
-			}
-		}catch {
-			nameOut = PlayerSettings.productName;
-			successFindName = false;
-		}
 
-		if(nameOut.Equals("") || !successFindName) nameOut = PlayerSettings.productName;
-		return nameOut;
-	}
 
-	// Try to find the target directory in the Resources/BuildScriptSettings.ini file
-	static string FindTargetDir(){
-		bool successFindDir = true;
-		string dirOut = "";
-		try{
-			TextAsset buildScriptSettingsAsset = Resources.Load("BuildScriptSettings") as TextAsset;
-			string settingsText = buildScriptSettingsAsset.text;
-			if(settingsText.Equals("")) successFindDir = false;
-			string[] textLines = settingsText.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
-			if(textLines.Length < 2) successFindDir = false;
-			if(successFindDir){
-				string[] lineSplit = textLines[1].Split(new string[] { " = ", "=" }, StringSplitOptions.RemoveEmptyEntries);
-				if(lineSplit.Length < 2) successFindDir = false;
-				if(successFindDir){
-					dirOut = lineSplit[1].Trim();
-				}
-			}
-		}catch {
-			dirOut = Application.dataPath + "/../Builds/";
-			successFindDir = false;
-		}
-
-		if(dirOut.Equals("") || !successFindDir) dirOut = Application.dataPath + "/../Builds/";
-		return dirOut;
-	}
 	 
 	// Windows -------
-
 	[MenuItem ("Custom/CI/Build Windows 64-bit")]
 	static void PerformWinBuild (){
-		// string target_dir = APP_NAME + ".exe";
-		string target_dir = FindAppName() + ".exe";
+		string target_dir = APP_NAME + ".exe";
 		GenericBuild(SCENES, TARGET_DIR + "/win/" + target_dir, BuildTarget.StandaloneWindows64,BuildOptions.None);
 	}
 
-	[MenuItem ("Custom/CI/Build Windows 32-bit")]
+	[MenuItem ("Custom/CI/Build Windows 32-bit")]	
 	static void PerformWin32Build (){
 		string target_dir = APP_NAME + "_32.exe";
 		GenericBuild(SCENES, TARGET_DIR + "/win_3232/" + target_dir, BuildTarget.StandaloneWindows,BuildOptions.None);
@@ -85,20 +34,20 @@ public class BuildScript{
 
 	// Linux ------
 
-	[MenuItem ("Custom/CI/Build Linux 64-bit")]
+	[MenuItem ("Custom/CI/Build Linux 64-bit")]	
 	static void PerformLinuxBuild (){
 		string target_dir = APP_NAME + "_32.exe";
 		GenericBuild(SCENES, TARGET_DIR + "/linux/" + target_dir, BuildTarget.StandaloneLinux64,BuildOptions.None);
 	}
 
-	[MenuItem ("Custom/CI/Build Linux 32-bit")]
+	[MenuItem ("Custom/CI/Build Linux 32-bit")]	
 	static void PerformLinux32Build (){
 		string target_dir = APP_NAME + "_32.exe";
 		GenericBuild(SCENES, TARGET_DIR + "/linux_32/" + target_dir, BuildTarget.StandaloneLinux,BuildOptions.None);
 	}
 
 	// Mac OS X -------
-	 
+	
 	[MenuItem ("Custom/CI/Build Mac OS X")]
 	static void PerformMacOSXBuild (){
 		string target_dir = APP_NAME + ".app";
