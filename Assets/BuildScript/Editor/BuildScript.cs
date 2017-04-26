@@ -28,12 +28,12 @@ public class BuildScript{
 		bool successFindName = true;
 		string nameOut = "";
 		try{
-			//TextAsset buildScriptSettingsAsset = Resources.Load("BuildScriptSettings") as TextAsset;
-			//string settingsText = buildScriptSettingsAsset.text;
+			TextAsset buildScriptSettingsAsset = Resources.Load("BuildScriptSettings") as TextAsset;
+			string settingsText = buildScriptSettingsAsset.text;
 
-			StreamReader sr = new StreamReader(Application.dataPath + "/BuildScript/Resources/BuildScriptSettings.ini");
-			string settingsText = sr.ReadToEnd();
-			sr.Close();
+			// StreamReader sr = new StreamReader(Application.dataPath + "/BuildScript/Resources/BuildScriptSettings.ini");
+			// string settingsText = sr.ReadToEnd();
+			// sr.Close();
 
 			if(settingsText.Equals("")) successFindName = false;
 			string[] textLines = settingsText.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
@@ -59,12 +59,12 @@ public class BuildScript{
 		bool successFindDir = true;
 		string dirOut = "";
 		try{
-			// TextAsset buildScriptSettingsAsset = Resources.Load("BuildScriptSettings") as TextAsset;
-			// string settingsText = buildScriptSettingsAsset.text;
+			TextAsset buildScriptSettingsAsset = Resources.Load("BuildScriptSettings") as TextAsset;
+			string settingsText = buildScriptSettingsAsset.text;
 
-			StreamReader sr = new StreamReader(Application.dataPath + "/BuildScript/Resources/BuildScriptSettings.ini");
-			string settingsText = sr.ReadToEnd();
-			sr.Close();
+			// StreamReader sr = new StreamReader(Application.dataPath + "/BuildScript/Resources/BuildScriptSettings.ini");
+			// string settingsText = sr.ReadToEnd();
+			// sr.Close();
 
 			if(settingsText.Equals("")) successFindDir = false;
 			string[] textLines = settingsText.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
