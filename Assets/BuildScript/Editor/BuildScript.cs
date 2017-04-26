@@ -16,13 +16,6 @@ public class BuildScript{
 	static string APP_NAME = "unity-jenkins-test";
 	static string TARGET_DIR = "D:/unity-jenkins-test/Builds/";
 
-	// Directory and name functions -------
-
-	static void SetNameAndDir(){
-		APP_NAME = FindAppName();
-		TARGET_DIR = FindTargetDir();
-	}
-
 	// Try to find the app name in the Resources/BuildScriptSettings.ini file
 	static string FindAppName(){
 		bool successFindName = true;
@@ -30,11 +23,6 @@ public class BuildScript{
 		try{
 			TextAsset buildScriptSettingsAsset = Resources.Load("BuildScriptSettings") as TextAsset;
 			string settingsText = buildScriptSettingsAsset.text;
-
-			// StreamReader sr = new StreamReader(Application.dataPath + "/BuildScript/Resources/BuildScriptSettings.ini");
-			// string settingsText = sr.ReadToEnd();
-			// sr.Close();
-
 			if(settingsText.Equals("")) successFindName = false;
 			string[] textLines = settingsText.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
 			if(textLines.Length < 2) successFindName = false;
@@ -61,11 +49,6 @@ public class BuildScript{
 		try{
 			TextAsset buildScriptSettingsAsset = Resources.Load("BuildScriptSettings") as TextAsset;
 			string settingsText = buildScriptSettingsAsset.text;
-
-			// StreamReader sr = new StreamReader(Application.dataPath + "/BuildScript/Resources/BuildScriptSettings.ini");
-			// string settingsText = sr.ReadToEnd();
-			// sr.Close();
-
 			if(settingsText.Equals("")) successFindDir = false;
 			string[] textLines = settingsText.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
 			if(textLines.Length < 2) successFindDir = false;
@@ -89,14 +72,13 @@ public class BuildScript{
 
 	[MenuItem ("Custom/CI/Build Windows 64-bit")]
 	static void PerformWinBuild (){
-		SetNameAndDir();
-		string target_dir = APP_NAME + ".exe";
+		// string target_dir = APP_NAME + ".exe";
+		string target_dir = FindAppName() + ".exe";
 		GenericBuild(SCENES, TARGET_DIR + "/win/" + target_dir, BuildTarget.StandaloneWindows64,BuildOptions.None);
 	}
 
 	[MenuItem ("Custom/CI/Build Windows 32-bit")]
 	static void PerformWin32Build (){
-		SetNameAndDir();
 		string target_dir = APP_NAME + "_32.exe";
 		GenericBuild(SCENES, TARGET_DIR + "/win_3232/" + target_dir, BuildTarget.StandaloneWindows,BuildOptions.None);
 	}
@@ -105,14 +87,12 @@ public class BuildScript{
 
 	[MenuItem ("Custom/CI/Build Linux 64-bit")]
 	static void PerformLinuxBuild (){
-		SetNameAndDir();
 		string target_dir = APP_NAME + "_32.exe";
 		GenericBuild(SCENES, TARGET_DIR + "/linux/" + target_dir, BuildTarget.StandaloneLinux64,BuildOptions.None);
 	}
 
 	[MenuItem ("Custom/CI/Build Linux 32-bit")]
 	static void PerformLinux32Build (){
-		SetNameAndDir();
 		string target_dir = APP_NAME + "_32.exe";
 		GenericBuild(SCENES, TARGET_DIR + "/linux_32/" + target_dir, BuildTarget.StandaloneLinux,BuildOptions.None);
 	}
@@ -121,7 +101,6 @@ public class BuildScript{
 	 
 	[MenuItem ("Custom/CI/Build Mac OS X")]
 	static void PerformMacOSXBuild (){
-		SetNameAndDir();
 		string target_dir = APP_NAME + ".app";
 		GenericBuild(SCENES, TARGET_DIR + "/mac/" + target_dir, BuildTarget.StandaloneOSXIntel,BuildOptions.None);
 	}
@@ -130,7 +109,6 @@ public class BuildScript{
 	 
 	[MenuItem ("Custom/CI/Build Web")]
 	static void PerformWebBuild (){
-		SetNameAndDir();
 		string target_dir = APP_NAME + ".unity3d";
 		GenericBuild(SCENES, TARGET_DIR + "/web/" + target_dir, BuildTarget.WebPlayer,BuildOptions.None);
 	}
