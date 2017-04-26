@@ -79,8 +79,8 @@ public class BuildScript{
 	[MenuItem ("Custom/CI/Build Windows 64-bit")]
 	static void PerformWinBuild (){
 		//SetNameAndDir();
-		string target_dir = APP_NAME + ".exe";
-		GenericBuild(SCENES, TARGET_DIR + "/win/" + target_dir, BuildTarget.StandaloneWindows64,BuildOptions.None);
+		string target_dir = FindAppName() + ".exe";
+		GenericBuild(SCENES, FindTargetDir() + "/win/" + target_dir, BuildTarget.StandaloneWindows64,BuildOptions.None);
 	}
 
 	[MenuItem ("Custom/CI/Build Windows 32-bit")]
